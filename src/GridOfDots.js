@@ -44,17 +44,18 @@ function GridOfDots({ nRows, nCols }) {
     return (
         <div>
             <div>
-                <span>{Picker({ color: color1, setColor: setColor1 })} {color1}</span>
-                <span>{Picker({ color: color2, setColor: setColor2 })} {color2}</span>
-                <span>{Picker({ color: color3, setColor: setColor3 })} {color3}</span>
-                <span>{Picker({ color: color4, setColor: setColor4 })} {color4}</span>
-                <span>{Picker({ color: color5, setColor: setColor5 })} {color5}</span>
-                <span>{Picker({ color: color6, setColor: setColor6 })} {color6}</span>
+                <span>{Picker({ color: color1, setColor: setColor1 })}</span>
+                <span>{Picker({ color: color2, setColor: setColor2 })}</span>
+                <span>{Picker({ color: color3, setColor: setColor3 })}</span>
+                <span>{Picker({ color: color4, setColor: setColor4 })}</span>
+                <span>{Picker({ color: color5, setColor: setColor5 })}</span>
+                <span>{Picker({ color: color6, setColor: setColor6 })}</span>
             </div>
             <div style={{ clear: "both" }}></div>
             <div style={{ clear: "both", "margin": "50px" }}>
                 {grid({ palette, gridColorIndices })}
             </div>
+            <div>{color1} {color2} {color3} {color4} {color5} {color6} </div>
         </div>
     );
 }

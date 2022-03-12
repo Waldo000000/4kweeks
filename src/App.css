@@ -50,3 +50,10 @@
   height: 240px;
   width: 240px;
 }
+
+@media (max-width: 500px) {
+  .App .react-colorful {
+    /* height: 50px; */
+    width: 33%;
+  }
+}
