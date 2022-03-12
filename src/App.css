@@ -45,3 +45,8 @@
   margin: 1px;
   display: inline-block;
 }
+
+.App .react-colorful {
+  height: 320px;
+  width: 320px;
+}

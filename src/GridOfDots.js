@@ -5,21 +5,20 @@ function GridOfDots({ nRows, nCols }) {
 
     var dot = ({ color, key }) => <span className="dot" key={key} style={{ backgroundColor: color }}></span>
 
-    var rowOfDots = ({ palette, nCols, rowKey }) => {
-        var x = [];
-        var dots = Array.from(Array(nCols)).map((_, colIndex) => {
+    var rowOfDots = ({ palette, rowColorIndices, rowKey }) => {
+        var dots = rowColorIndices.map((_, colIndex) => {
             var dotKey = rowKey + "_" + colIndex;
-            var randColorIdx = Math.floor(Math.random() * palette.length);
-            var color = palette[randColorIdx];
-            return dot({ color, key: dotKey });
+            var paletteIdx = rowColorIndices[colIndex];
+            var color = palette[paletteIdx];
+            return dot({ color, key: dotKey })
         })
+
         return <div key={rowKey}>{dots}</div>
     };
 
-    var grid = ({ palette, nRows, nCols }) => {
-        const arr = Array.from(Array(nRows));
-        var rows = arr.map((_, rowKey) => {
-            return rowOfDots({ palette, nCols, rowKey })
+    var grid = ({ palette, gridColorIndices }) => {
+        var rows = gridColorIndices.map((rowColorIndices, rowKey) => {
+            return rowOfDots({ palette, rowColorIndices, rowKey })
         })
         return rows
     }
@@ -32,19 +31,29 @@ function GridOfDots({ nRows, nCols }) {
     const [color6, setColor6] = useState("#C6CFFF"); // invest :-(
 
     const palette = [color1, color2, color3, color4, color5, color6]
+
+    // const gridColorIndices = 
+    const [gridColorIndices, setGridColorIndices] = useState(Array.from(Array(nRows)).map((_, rowIndex) => Array.from(Array(nCols)).map((_, colIndex) => {
+        var randColorIdx = Math.floor(Math.random() * palette.length);
+        return randColorIdx;
+    })))
+
+    // var picker = ({color, setColor}) => {
+    //     <span>{Picker({ color, setColor })} {color}</span>
+    // }
     return (
         <div>
             <div>
-                <span>{Picker({ color: color1, setColor: setColor1 })}</span>
-                <span>{Picker({ color: color2, setColor: setColor2 })}</span>
-                <span>{Picker({ color: color3, setColor: setColor3 })}</span>
-                <span>{Picker({ color: color4, setColor: setColor4 })}</span>
-                <span>{Picker({ color: color5, setColor: setColor5 })}</span>
-                <span>{Picker({ color: color6, setColor: setColor6 })}</span>
+                <span>{Picker({ color: color1, setColor: setColor1 })} {color1}</span>
+                <span>{Picker({ color: color2, setColor: setColor2 })} {color2}</span>
+                <span>{Picker({ color: color3, setColor: setColor3 })} {color3}</span>
+                <span>{Picker({ color: color4, setColor: setColor4 })} {color4}</span>
+                <span>{Picker({ color: color5, setColor: setColor5 })} {color5}</span>
+                <span>{Picker({ color: color6, setColor: setColor6 })} {color6}</span>
             </div>
             <div style={{ clear: "both" }}></div>
-            <div style={{ clear: "both", "margin": "50px"}}>
-                {grid({ palette, nRows, nCols })}
+            <div style={{ clear: "both", "margin": "50px" }}>
+                {grid({ palette, gridColorIndices })}
             </div>
         </div>
     );
